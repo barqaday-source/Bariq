@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فضاء الكلمة | رجاءٌ معلّق</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --sky-blue: #e0f2f7;
+            --sun-glow: rgba(255, 252, 220, 0.6);
+            --modern-charcoal: #2c3e50;
+            --soft-white: rgba(255, 255, 255, 0.85);
+            --accent-bronze: #cd7f32;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            background-attachment: fixed;
+            color: var(--modern-charcoal);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--sun-glow) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .cloud-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('https://www.transparenttextures.com/patterns/clouds.png');
+            opacity: 0.3;
+            z-index: -1;
+            animation: moveClouds 60s linear infinite;
+        }
+
+        @keyframes moveClouds {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 0; }
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 10%; position: fixed; width: 100%; top: 0; z-index: 2000;
+            transition: 0.5s;
+        }
+
+        nav.scrolled {
+            padding: 15px 10%; background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--modern-charcoal); text-decoration: none; letter-spacing: 1px; }
+
+        .hamburger { cursor: pointer; z-index: 2005; }
+        .hamburger i { font-size: 1.5rem; color: var(--modern-charcoal); transition: 0.3s; }
+
+        section { padding: 150px 10%; min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        .hero h1 {
+            font-size: 3rem; font-weight: 200; line-height: 1.5; 
+            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
+        }
+
+        .poem-card {
+            background: var(--soft-white);
+            padding: 60px;
+            border-radius: 40px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+
+        /* تنسيق العنوان الجديد */
+        .poem-title {
+            font-size: 1.8rem;
+            font-weight: 200;
+            margin-bottom: 50px;
+            color: var(--modern-charcoal);
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+
+        .poem-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--accent-bronze);
+        }
+
+        .poem-row { display: flex; justify-content: center; gap: 40px; margin-bottom: 25px; }
+        
+        .shatr { 
+            font-size: 1.4rem; font-weight: 400; color: #444;
+            transition: 0.3s;
+        }
+        .shatr:hover { color: #000; transform: scale(1.02); }
+
+        .signature-modern {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300; font-size: 0.8rem; letter-spacing: 4px;
+            text-transform: uppercase; margin-top: 40px; color: #7f8c8d;
+            border-bottom: 1px solid #7f8c8d; padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .poem-en-modern {
+            margin-top: 50px; font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem; line-height: 2.2; color: #888;
+            max-width: 650px; margin-left: auto; margin-right: auto;
+            direction: ltr; text-align: center;
+        }
+
+        .full-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95); display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 30px;
+            transform: translateX(100%); transition: 0.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1999;
+        }
+        .full-menu.open { transform: translateX(0); }
+        .full-menu a { font-size: 2.5rem; font-weight: 200; color: var(--modern-charcoal); text-decoration: none; }
+
+        .footer-combined { padding: 50px 10% 30px; text-align: center; }
+        .social-links { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; }
+        .social-links a { color: var(--modern-charcoal); font-size: 1.5rem; transition: 0.3s; }
+        .social-links a:hover { transform: translateY(-5px); color: var(--accent-bronze); }
+
+        footer p { font-size: 0.75rem; color: #7f8c8d; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .poem-row { flex-direction: column; gap: 5px; }
+            .poem-card { padding: 40px 20px; border-radius: 20px; }
+            .shatr { font-size: 1.1rem; }
+            .poem-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cloud-bg"></div>
+
+    <nav id="navbar">
+        <a href="#" class="logo">فضاء الكلمة.</a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars-staggered" id="menuIcon"></i>
+        </div>
+    </nav>
+
+    <div class="full-menu" id="fullMenu">
+        <a href="#hero" onclick="closeMenu()">بداية</a>
+        <a href="#poem" onclick="closeMenu()">القصيدة</a>
+        <a href="#contact" onclick="closeMenu()">تواصل</a>
+    </div>
+
+    <section id="hero">
+        <div data-aos="fade-up" data-aos-duration="2000">
+            <h1>" مَتى يَشتَفي مِنكَ الفُؤادُ المُعَذَّبُ "</h1>
+            <p style="font-weight: 200; margin-top: 15px; opacity: 0.7;">قيس بن الملوح</p>
+        </div>
+    </section>
+
+    <section id="poem">
+        <div class="poem-card" data-aos="fade-up">
+            
+            <h2 class="poem-title">رجاءٍ معلّق</h2>
+
+            <div class="poem-row">
+                <div class="shatr">كَأنَّ على صدري حُطامَ مواجِعٍ</div>
+                <div class="shatr">تراكمَ حتى ضاقَ فيه تنفُّسي</div>
+            </div>
+            <div class="poem-row">
+                <div class="shatr">وأمشي كأنّ الليلَ يسكُنُ أضلُعي</div>
+                <div class="shatr">تثاقلتِ الأحلامُ فوق وسادتي</div>
+            </div>
+            <div class="poem-row">
+                <div class="shatr">أُقبّلُ صبري كلَّ حينٍ خاشعًا</div>
+                <div class="shatr">وأرجو إلهي أن يُخفِّفَ مُثقَلي</div>
+            </div>
+            <div class="poem-row">
+                <div class="shatr">فإن ضاقَ صدري فالرجاءُ مُعلَّقٌ</div>
+                <div class="shatr">بربٍّ إذا ناداهُ عبدٌ يُلبِّي</div>
+            </div>
+            <div class="poem-row">
+                <div class="shatr">فيا ربُّ إنّي قد تعبتُ من الأسى</div>
+                <div class="shatr">فإمّا شفاءُ القلبِ… أو لطفُكَ الخفيّ</div>
+            </div>
+            <div class="poem-row">
+                <div class="shatr">وأعلمُ أنّ الليلَ مهما تمادَى</div>
+                <div class="shatr">فلا بدَّ أن يُقضي بصبحٍ مُشرقِ</div>
+            </div>
+
+            <center><div class="signature-modern">FATIMA NAJI</div></center>
+
+            <div class="poem-en-modern">
+                Layered high until my breath grows tight within.<br>
+                I walk as if the night resides inside my ribs,<br>
+                No dawn revives me, nor does sunlight soothe.<br>
+                My dreams grow heavy upon my pillow,<br>
+                And sleeplessness becomes my weary eyes’ companion.<br>
+                I kiss my patience, humbly, time and time again,<br>
+                And pray my Lord may lighten what I bear.<br>
+                And if my chest constricts, my hope remains<br>
+                Suspended in a Lord who answers when called upon.<br>
+                O Lord, I have grown weary of this sorrow —<br>
+                Grant healing to my heart… or Your hidden grace.<br>
+                For I know the night, however long it lingers,<br>
+                Must yield, at last, to a radiant dawn.
+            </div>
+        </div>
+    </section>
+
+    <div class="footer-combined" id="contact">
+        <div class="social-links">
+            <a href="https://www.instagram.com/bq23bq?igsh=dHAwMHVwNXYzaWF0" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:biraqaday@gmail.com"><i class="far fa-envelope"></i></a>
+        </div>
+        <footer>
+            <p>© 2026 | ARABI ANA | DESIGNED FOR FATIMA</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        function toggleMenu() {
+            const menu = document.getElementById('fullMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('open');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function closeMenu() {
+            document.getElementById('fullMenu').classList.remove('open');
+            document.getElementById('menuIcon').classList.remove('fa-xmark');
+        }
+
+        window.onscroll = function() {
+            const nav = document.getElementById('navbar');
+            if (window.pageYOffset > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
+    </script>
+</body>
+</html>
