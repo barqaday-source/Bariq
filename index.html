@@ -2,270 +2,121 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فضاء الكلمة | رجاءٌ معلّق</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EBQAD | لوحة التحكم الشاملة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <style>
-        :root {
-            --sky-blue: #e0f2f7;
-            --sun-glow: rgba(255, 252, 220, 0.6);
-            --modern-charcoal: #2c3e50;
-            --soft-white: rgba(255, 255, 255, 0.85);
-            --accent-bronze: #cd7f32;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-
-        body {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-            background-attachment: fixed;
-            color: var(--modern-charcoal);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: -100px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--sun-glow) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .cloud-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: url('https://www.transparenttextures.com/patterns/clouds.png');
-            opacity: 0.3;
-            z-index: -1;
-            animation: moveClouds 60s linear infinite;
-        }
-
-        @keyframes moveClouds {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 0; }
-        }
-
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 30px 10%; position: fixed; width: 100%; top: 0; z-index: 2000;
-            transition: 0.5s;
-        }
-
-        nav.scrolled {
-            padding: 15px 10%; background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-        }
-
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--modern-charcoal); text-decoration: none; letter-spacing: 1px; }
-
-        .hamburger { cursor: pointer; z-index: 2005; }
-        .hamburger i { font-size: 1.5rem; color: var(--modern-charcoal); transition: 0.3s; }
-
-        section { padding: 150px 10%; min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-        .hero h1 {
-            font-size: 3rem; font-weight: 200; line-height: 1.5; 
-            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
-        }
-
-        .poem-card {
-            background: var(--soft-white);
-            padding: 60px;
-            border-radius: 40px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 900px;
-            position: relative;
-        }
-
-        /* تنسيق العنوان الجديد */
-        .poem-title {
-            font-size: 1.8rem;
-            font-weight: 200;
-            margin-bottom: 50px;
-            color: var(--modern-charcoal);
-            position: relative;
-            display: inline-block;
-            letter-spacing: 2px;
-        }
-
-        .poem-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 1px;
-            background: var(--accent-bronze);
-        }
-
-        .poem-row { display: flex; justify-content: center; gap: 40px; margin-bottom: 25px; }
-        
-        .shatr { 
-            font-size: 1.4rem; font-weight: 400; color: #444;
-            transition: 0.3s;
-        }
-        .shatr:hover { color: #000; transform: scale(1.02); }
-
-        .signature-modern {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300; font-size: 0.8rem; letter-spacing: 4px;
-            text-transform: uppercase; margin-top: 40px; color: #7f8c8d;
-            border-bottom: 1px solid #7f8c8d; padding-bottom: 5px;
-            display: inline-block;
-        }
-
-        .poem-en-modern {
-            margin-top: 50px; font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem; line-height: 2.2; color: #888;
-            max-width: 650px; margin-left: auto; margin-right: auto;
-            direction: ltr; text-align: center;
-        }
-
-        .full-menu {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.95); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; gap: 30px;
-            transform: translateX(100%); transition: 0.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1999;
-        }
-        .full-menu.open { transform: translateX(0); }
-        .full-menu a { font-size: 2.5rem; font-weight: 200; color: var(--modern-charcoal); text-decoration: none; }
-
-        .footer-combined { padding: 50px 10% 30px; text-align: center; }
-        .social-links { display: flex; justify-content: center; gap: 40px; margin-bottom: 20px; }
-        .social-links a { color: var(--modern-charcoal); font-size: 1.5rem; transition: 0.3s; }
-        .social-links a:hover { transform: translateY(-5px); color: var(--accent-bronze); }
-
-        footer p { font-size: 0.75rem; color: #7f8c8d; letter-spacing: 1px; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .poem-row { flex-direction: column; gap: 5px; }
-            .poem-card { padding: 40px 20px; border-radius: 20px; }
-            .shatr { font-size: 1.1rem; }
-            .poem-title { font-size: 1.4rem; }
-        }
+        body { background: #0B1020; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(78,243,232,0.1); transition: 0.3s; }
+        .card:hover { border-color: #4EF3E8; }
+        /* تحسين اللمس للهواتف */
+        input, textarea, button { font-size: 16px !important; } 
     </style>
 </head>
-<body>
+<body class="flex flex-col md:flex-row min-h-screen">
 
-    <div class="cloud-bg"></div>
-
-    <nav id="navbar">
-        <a href="#" class="logo">فضاء الكلمة.</a>
-        <div class="hamburger" onclick="toggleMenu()">
-            <i class="fas fa-bars-staggered" id="menuIcon"></i>
-        </div>
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-lg border-t border-white/10 z-50 flex justify-around p-3">
+        <button onclick="showTab('projects')" class="text-cyan-400 text-xl"><i class="fas fa-project-diagram"></i></button>
+        <button onclick="showTab('messages')" class="text-white/50 text-xl"><i class="fas fa-envelope"></i></button>
+        <button onclick="showTab('about')" class="text-white/50 text-xl"><i class="fas fa-user-edit"></i></button>
     </nav>
 
-    <div class="full-menu" id="fullMenu">
-        <a href="#hero" onclick="closeMenu()">بداية</a>
-        <a href="#poem" onclick="closeMenu()">القصيدة</a>
-        <a href="#contact" onclick="closeMenu()">تواصل</a>
-    </div>
-
-    <section id="hero">
-        <div data-aos="fade-up" data-aos-duration="2000">
-            <h1>" مَتى يَشتَفي مِنكَ الفُؤادُ المُعَذَّبُ "</h1>
-            <p style="font-weight: 200; margin-top: 15px; opacity: 0.7;">قيس بن الملوح</p>
+    <aside class="hidden md:flex w-64 bg-black/40 p-6 border-l border-white/5 flex-col gap-6">
+        <h1 class="text-2xl font-bold text-cyan-400 text-center tracking-widest">EBQAD</h1>
+        <div class="flex flex-col gap-2">
+            <button onclick="showTab('projects')" class="text-right p-3 rounded-xl hover:bg-cyan-400/10 transition">المشاريع</button>
+            <button onclick="showTab('messages')" class="text-right p-3 rounded-xl hover:bg-cyan-400/10 transition">الرسائل</button>
+            <button onclick="showTab('about')" class="text-right p-3 rounded-xl hover:bg-cyan-400/10 transition">معلوماتي</button>
         </div>
-    </section>
+    </aside>
 
-    <section id="poem">
-        <div class="poem-card" data-aos="fade-up">
+    <main class="flex-1 p-4 md:p-10 mb-20 md:mb-0">
+        
+        <section id="projects" class="tab-content active">
+            <h2 class="text-2xl font-bold text-cyan-400 mb-6 flex items-center gap-2">
+                <i class="fas fa-plus-circle text-sm"></i> إضافة مشروع جديد
+            </h2>
+            <div class="card p-4 md:p-6 rounded-2xl mb-8 flex flex-col gap-4">
+                <input id="t" type="text" placeholder="عنوان المشروع" class="bg-white/5 p-3 rounded-xl border border-white/10 outline-none focus:border-cyan-400">
+                <input id="i" type="text" placeholder="رابط صورة المشروع" class="bg-white/5 p-3 rounded-xl border border-white/10 outline-none focus:border-cyan-400">
+                <textarea id="d" placeholder="وصف المشروع بالتفصيل..." class="bg-white/5 p-3 rounded-xl border border-white/10 h-24 outline-none focus:border-cyan-400"></textarea>
+                <button onclick="addProject()" class="bg-cyan-400 text-black font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(78,243,232,0.2)] active:scale-95 transition">حفظ في قاعدة البيانات</button>
+            </div>
             
-            <h2 class="poem-title">رجاءٍ معلّق</h2>
+            <h3 class="text-xl font-bold mb-4">المشاريع الحالية</h3>
+            <div id="p-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+        </section>
 
-            <div class="poem-row">
-                <div class="shatr">كَأنَّ على صدري حُطامَ مواجِعٍ</div>
-                <div class="shatr">تراكمَ حتى ضاقَ فيه تنفُّسي</div>
-            </div>
-            <div class="poem-row">
-                <div class="shatr">وأمشي كأنّ الليلَ يسكُنُ أضلُعي</div>
-                <div class="shatr">تثاقلتِ الأحلامُ فوق وسادتي</div>
-            </div>
-            <div class="poem-row">
-                <div class="shatr">أُقبّلُ صبري كلَّ حينٍ خاشعًا</div>
-                <div class="shatr">وأرجو إلهي أن يُخفِّفَ مُثقَلي</div>
-            </div>
-            <div class="poem-row">
-                <div class="shatr">فإن ضاقَ صدري فالرجاءُ مُعلَّقٌ</div>
-                <div class="shatr">بربٍّ إذا ناداهُ عبدٌ يُلبِّي</div>
-            </div>
-            <div class="poem-row">
-                <div class="shatr">فيا ربُّ إنّي قد تعبتُ من الأسى</div>
-                <div class="shatr">فإمّا شفاءُ القلبِ… أو لطفُكَ الخفيّ</div>
-            </div>
-            <div class="poem-row">
-                <div class="shatr">وأعلمُ أنّ الليلَ مهما تمادَى</div>
-                <div class="shatr">فلا بدَّ أن يُقضي بصبحٍ مُشرقِ</div>
-            </div>
+        <section id="messages" class="tab-content">
+            <h2 class="text-2xl font-bold text-cyan-400 mb-6">صندوق الوارد</h2>
+            <div id="m-list" class="flex flex-col gap-4"></div>
+        </section>
 
-            <center><div class="signature-modern">FATIMA NAJI</div></center>
-
-            <div class="poem-en-modern">
-                Layered high until my breath grows tight within.<br>
-                I walk as if the night resides inside my ribs,<br>
-                No dawn revives me, nor does sunlight soothe.<br>
-                My dreams grow heavy upon my pillow,<br>
-                And sleeplessness becomes my weary eyes’ companion.<br>
-                I kiss my patience, humbly, time and time again,<br>
-                And pray my Lord may lighten what I bear.<br>
-                And if my chest constricts, my hope remains<br>
-                Suspended in a Lord who answers when called upon.<br>
-                O Lord, I have grown weary of this sorrow —<br>
-                Grant healing to my heart… or Your hidden grace.<br>
-                For I know the night, however long it lingers,<br>
-                Must yield, at last, to a radiant dawn.
+        <section id="about" class="tab-content">
+            <h2 class="text-2xl font-bold text-cyan-400 mb-6">تعديل بيانات البروفايل</h2>
+            <div class="card p-6 rounded-2xl">
+                <textarea id="aboutArea" class="w-full bg-black/30 p-4 rounded-xl border border-white/10 h-48 mb-4 outline-none focus:border-cyan-400 text-cyan-100"></textarea>
+                <button onclick="saveAbout()" class="w-full bg-cyan-400 text-black font-bold py-3 rounded-xl">تحديث الموقع فوراً</button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="footer-combined" id="contact">
-        <div class="social-links">
-            <a href="https://www.instagram.com/bq23bq?igsh=dHAwMHVwNXYzaWF0" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:biraqaday@gmail.com"><i class="far fa-envelope"></i></a>
-        </div>
-        <footer>
-            <p>© 2026 | ARABI ANA | DESIGNED FOR FATIMA</p>
-        </footer>
-    </div>
+    </main>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        const API = "http://127.0.0.1:5000/api";
 
-        function toggleMenu() {
-            const menu = document.getElementById('fullMenu');
-            const icon = document.getElementById('menuIcon');
-            menu.classList.toggle('open');
-            icon.classList.toggle('fa-xmark');
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            // تحديث ألوان الأيقونات في الجوال
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.replace('text-cyan-400', 'text-white/50'));
+            event.currentTarget.classList.replace('text-white/50', 'text-cyan-400');
         }
 
-        function closeMenu() {
-            document.getElementById('fullMenu').classList.remove('open');
-            document.getElementById('menuIcon').classList.remove('fa-xmark');
+        async function loadData() {
+            try {
+                const pr = await (await fetch(`${API}/projects`)).json();
+                document.getElementById('p-list').innerHTML = pr.map(p => `
+                    <div class="card p-4 rounded-2xl">
+                        <img src="${p.image_url}" class="w-full h-32 object-cover rounded-xl mb-3 bg-white/5" onerror="this.src='https://via.placeholder.com/300x150?text=No+Image'">
+                        <h4 class="font-bold text-cyan-400 truncate">${p.title}</h4>
+                        <p class="text-xs text-slate-400 mb-4 line-clamp-2">${p.description}</p>
+                        <button onclick="delP(${p.id})" class="w-full py-2 bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 hover:bg-red-500 hover:text-white transition">حذف نهائي</button>
+                    </div>
+                `).join('');
+
+                const ms = await (await fetch(`${API}/messages`)).json();
+                document.getElementById('m-list').innerHTML = ms.length ? ms.map(m => `
+                    <div class="card p-5 rounded-2xl flex flex-col gap-2">
+                        <div class="flex justify-between items-start">
+                            <span class="font-bold text-cyan-400">${m.name}</span>
+                            <a href="mailto:${m.email}" class="text-xs bg-cyan-400/10 text-cyan-400 px-3 py-1 rounded-full border border-cyan-400/20">رد سريع</a>
+                        </div>
+                        <p class="text-sm text-slate-300 bg-black/20 p-3 rounded-lg">${m.message}</p>
+                        <span class="text-[10px] text-slate-600">${m.date}</span>
+                    </div>
+                `).join('') : '<p class="text-center text-slate-600">لا توجد رسائل جديدة</p>';
+
+                const ab = await (await fetch(`${API}/about`)).json();
+                document.getElementById('aboutArea').value = ab.content;
+            } catch (e) { console.log("السيرفر غير متصل"); }
         }
 
-        window.onscroll = function() {
-            const nav = document.getElementById('navbar');
-            if (window.pageYOffset > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        };
+        async function addProject() {
+            const data = { title:document.getElementById('t').value, description:document.getElementById('d').value, image_url:document.getElementById('i').value, tech_stack: "FullStack" };
+            const res = await fetch(`${API}/projects`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+            if(res.ok) { alert("تم الحفظ!"); loadData(); }
+        }
+
+        async function delP(id) { if(confirm('متأكد؟')) { await fetch(`${API}/projects/${id}`, {method:'DELETE'}); loadData(); } }
+        async function saveAbout() { await fetch(`${API}/about`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({content: document.getElementById('aboutArea').value}) }); alert("تحدث البروفايل!"); }
+
+        window.onload = loadData;
     </script>
 </body>
-</html>
+                </html>
+                
